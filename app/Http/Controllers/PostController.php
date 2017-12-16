@@ -14,8 +14,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
-        return "Here will be view for Post list";
+        $posts = Post::latest()->get();
+
+        return view('posts.index', compact('posts'));
     }
 
     /**
