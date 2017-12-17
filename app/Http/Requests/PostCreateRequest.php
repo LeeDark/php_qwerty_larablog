@@ -51,7 +51,7 @@ class PostCreateRequest extends FormRequest
         ]);
 
         session()->flash(
-            'message', 'Your post has now been published.'
+            'message', 'Your post has now been published!'
         );
     }
 }
