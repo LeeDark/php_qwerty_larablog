@@ -28,7 +28,7 @@
                 @yield ('content')
 
                 <!-- Sidebar Widgets Column -->
-                @include ('layouts._sidebar')
+                {{-- @include ('layouts._sidebar') --}}
             </div>
             <!-- /.row -->
         </div>

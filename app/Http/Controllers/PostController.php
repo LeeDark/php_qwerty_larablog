@@ -99,6 +99,6 @@ class PostController extends Controller
             'message', 'Post successfully deleted!'
         );
 
-        return redirect('/');
+        return redirect()->home();
     }
 }
