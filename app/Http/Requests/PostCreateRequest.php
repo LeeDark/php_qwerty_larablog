@@ -25,17 +25,30 @@ class PostCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'author' => 'required',
-            'body'  => 'required'
+            'title'     => 'required|min:2',
+            'author'    => 'required|min:2',
+            'body'      => 'required|min:2',
+            'image'     => 'required|image|mimes:jpeg,png,gif,svg'
         ];
     }
 
     public function persist()
     {
-        Post::create(
-            $this->only(['title', 'author', 'body'])
+        $imagePath = '/images/blog/';
+        $imageName = microtime(true).'.'
+            .$this->file('image')->getClientOriginalExtension();
+
+        $this->file('image')->move(
+            public_path() . $imagePath, 
+            $imageName
         );
+
+        Post::create([
+            'title'     => $this->post('title'),
+            'author'    => $this->post('author'),
+            'body'      => $this->post('body'),
+            'image'     => $imagePath . $imageName
+        ]);
 
         session()->flash(
             'message', 'Your post has now been published.'

@@ -35,5 +35,11 @@
         <!-- /.container -->
         <!-- Footer -->
         @include ('layouts._footer')
+
+        <!--
+        <script>
+            $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+        </script>
+        -->
     </body>
 </html>
