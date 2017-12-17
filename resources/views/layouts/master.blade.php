@@ -15,6 +15,12 @@
         <!-- Navigation -->
         @include ('layouts._navigation')
 
+        @if ($flash = session('message'))
+            <div id="flash-message" class="alert alert-success" role="alert">
+                {{ $flash }}
+            </div>
+        @endif
+
         <!-- Page Content -->
         <div class="container">
             <div class="row">
