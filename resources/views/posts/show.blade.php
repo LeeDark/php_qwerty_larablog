@@ -20,6 +20,7 @@
 	        <p class="card-text">{{ $post->body }}</p>
 	        <div class="row">
 		        <div class="col-md-6">
+		        	<a href="/posts" class="btn btn-primary">Back to list</a>
 		            <a href="/posts/{{ $post->id }}/edit" class="btn btn-primary">Edit Post</a>
 		        </div>
 		        <div class="col-md-6 text-right">

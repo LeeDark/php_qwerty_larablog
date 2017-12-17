@@ -28,7 +28,7 @@
 		</div>
 
 		<div class="form-group">
-			<button type="submit" class="btn btn-primary">Edit</button>
+			<button type="submit" class="btn btn-primary">Apply</button>
 		</div>
 
 		<div class="form-group">
