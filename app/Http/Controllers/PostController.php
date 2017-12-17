@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Http\Requests\PostCreateRequest;
+use App\Http\Requests\PostUpdateRequest;
 
 class PostController extends Controller
 {
@@ -62,7 +63,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -72,9 +73,11 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostUpdateRequest $request, Post $post)
     {
-        //
+        $request->persist($post);
+
+        return redirect()->to('/posts/' . $post->id);
     }
 
     /**
@@ -85,6 +88,17 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        // removing image
+        if (\File::exists(public_path() . $post->image)) {
+            \File::delete(public_path() . $post->image);
+        }
+
+        $post->delete();
+
+        session()->flash(
+            'message', 'Post successfully deleted!'
+        );
+
+        return redirect('/');
     }
 }
