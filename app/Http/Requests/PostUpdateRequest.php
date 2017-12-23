@@ -26,7 +26,6 @@ class PostUpdateRequest extends FormRequest
     {
         return [
             'title'     => 'required|min:2',
-            'author'    => 'required|min:2',
             'body'      => 'required|min:2',
             'image'     => 'image|mimes:jpeg,png,gif,svg'
         ];
@@ -57,7 +56,6 @@ class PostUpdateRequest extends FormRequest
         Post::where('id', $post->id)
             ->update([
                 'title'     => $this->post('title'),
-                'author'    => $this->post('author'),
                 'body'      => $this->post('body'),
                 'image'     => $imagePathName
         ]);

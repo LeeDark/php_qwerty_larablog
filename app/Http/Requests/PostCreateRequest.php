@@ -26,7 +26,6 @@ class PostCreateRequest extends FormRequest
     {
         return [
             'title'     => 'required|min:2',
-            'author'    => 'required|min:2',
             'body'      => 'required|min:2',
             'image'     => 'required|image|mimes:jpeg,png,gif,svg'
         ];
@@ -43,9 +42,9 @@ class PostCreateRequest extends FormRequest
             $imageName
         );
 
-        Post::create([
+        $post = Post::create([
+            'user_id'   => auth()->id(),
             'title'     => $this->post('title'),
-            'author'    => $this->post('author'),
             'body'      => $this->post('body'),
             'image'     => $imagePath . $imageName
         ]);
@@ -53,5 +52,7 @@ class PostCreateRequest extends FormRequest
         session()->flash(
             'message', 'Your post has now been published!'
         );
+
+        return $post;
     }
 }

@@ -4,7 +4,7 @@
 <div class="col-sm-8 blog-main">
 	<div class="card mb-4">
 		<div class="card-header text-muted">
-        <div class="card-text">Posted on {{ $post->created_at->format('l jS \\of F Y h:i:s A') }} by {{ $post->author }}</div>
+        <div class="card-text">Posted on {{ $post->created_at->format('l jS \\of F Y h:i:s A') }} by {{ $post->author->name }}</div>
         
         @if ($post->updated_at->ne($post->created_at))
         <div class="card-text">Updated on {{ $post->updated_at->format('l jS \\of F Y h:i:s A') }}</div>

@@ -15,11 +15,6 @@
 				</div>
 
 				<div class="form-group">
-					<label for="author">Author:</label>
-					<input type="text" class="form-control" id="author" name="author" value="{{ $post->author }}" required>
-				</div>
-
-				<div class="form-group">
 					<label for="body">Body:</label>
 					<textarea id="body" class="form-control" name="body" required>{{ $post->body }}</textarea>
 				</div>

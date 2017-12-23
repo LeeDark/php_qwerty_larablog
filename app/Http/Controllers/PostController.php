@@ -26,7 +26,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->simplePaginate(5);
+        $posts = Post::latest()->simplePaginate(2);
 
         return view('posts.index', compact('posts'));
     }
@@ -49,9 +49,9 @@ class PostController extends Controller
      */
     public function store(PostCreateRequest $request)
     {
-        $request->persist();
+        $post = $request->persist();
 
-        return redirect()->home();
+        return redirect($post->path());
     }
 
     /**
@@ -87,7 +87,7 @@ class PostController extends Controller
     {
         $request->persist($post);
 
-        return redirect()->to('/posts/' . $post->id);
+        return redirect($post->path());
     }
 
     /**
