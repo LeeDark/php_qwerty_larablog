@@ -19,16 +19,21 @@
 
 		<div class="form-group">
 			<label for="body">Body:</label>
-			<textarea id="body" class="form-control" name="body">{{ $post->body }}</textarea>
+			<textarea id="body" class="form-control" name="body" required>{{ $post->body }}</textarea>
 		</div>
 
 		<div class="form-group">
-			<label for="image">Select image for post:</label>
+			<label for="image">Select new image for post:</label>
 			<input type="file" class="form-control-file" id="image" name="image" accept="image/*">
 		</div>
 
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary">Apply</button>
+		<div class="row">
+			<div class="col-md-6">
+				<button type="submit" class="btn btn-primary">Apply</button>
+			</div>
+			<div class="col-md-6 text-right">
+				<a href="/posts/{{ $post->id }}" class="btn btn-warning">Cancel</a>
+			</div>
 		</div>
 
 		<div class="form-group">

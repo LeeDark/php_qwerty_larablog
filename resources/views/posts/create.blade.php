@@ -8,26 +8,31 @@
 		{{ csrf_field() }}
 		<div class="form-group">
 			<label for="title">Title:</label>
-			<input type="text" class="form-control" id="title" name="title" required>
+			<input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
 		</div>
 
 		<div class="form-group">
 			<label for="author">Author:</label>
-			<input type="text" class="form-control" id="author" name="author" required>
+			<input type="text" class="form-control" id="author" name="author" value="{{ old('author') }}" required>
 		</div>
 
 		<div class="form-group">
 			<label for="body">Body:</label>
-			<textarea id="body" class="form-control" name="body"></textarea>
+			<textarea id="body" class="form-control" name="body" required>{{ old('body') }}</textarea>
 		</div>
 
 		<div class="form-group">
 			<label for="image">Select image for post:</label>
-			<input type="file" class="form-control-file" id="image" name="image" accept="image/*">
+			<input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
 		</div>
 
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary">Apply</button>
+		<div class="row">
+			<div class="col-md-6">
+				<button type="submit" class="btn btn-primary">Apply</button>
+			</div>
+			<div class="col-md-6 text-right">
+				<a href="/posts" class="btn btn-warning">Cancel</a>
+			</div>
 		</div>
 
 		<div class="form-group">
