@@ -11,15 +11,19 @@
     <div class="row">
         <div class="col-md-6">
             <a href="/posts/{{ $post->id }}" class="btn btn-primary">Read More &rarr;</a>
+            @can ('update', $post)
             <a href="/posts/{{ $post->id }}/edit" class="btn btn-primary">Edit Post</a>
+            @endcan
         </div>
-        <div class="col-md-6 text-right">
-            <form method="POST" action="/posts/{{ $post->id }}">
-                {{ csrf_field() }}
-                {{ method_field('DELETE') }}
-                <button type="submit" class="btn btn-danger">Delete Post</button>
-            </form>
-        </div>
+        @can ('delete', $post)
+            <div class="col-md-6 text-right">
+                <form method="POST" action="/posts/{{ $post->id }}">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <button type="submit" class="btn btn-danger">Delete Post</button>
+                </form>
+            </div>
+        @endcan
     </div>
     
     <div class="card-footer text-muted">

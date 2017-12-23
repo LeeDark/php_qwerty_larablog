@@ -85,6 +85,8 @@ class PostController extends Controller
      */
     public function update(PostUpdateRequest $request, Post $post)
     {
+        $this->authorize('update', $post);
+
         $request->persist($post);
 
         return redirect($post->path());
@@ -98,6 +100,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
+
         // removing image
         if (\File::exists(public_path() . $post->image)) {
             \File::delete(public_path() . $post->image);
