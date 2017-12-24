@@ -36,25 +36,21 @@ class Post extends Model
 
     public function addLike($like)
     {
-    	// TODO: like from another user => Test User
-    	if ($this->author->id == auth()->id()) {
-    		// Message?
-            dd('You can not like/unlike your post!');   // 
-    		return;
-    	}
-
     	$primaryKey = [
     		'user_id' => auth()->id(),
     		'post_id' => $this->id
     	];
+
         $likeValue = [
             'like_value' => $like
         ];
 
         if (! $this->likes()->where($primaryKey)->exists()) {
-            $this->likes()->create($primaryKey + $likeValue);
+            $this->likes()
+                ->create($primaryKey + $likeValue);
         } else {
-            $this->likes()->where($primaryKey)->update($likeValue);
+            $this->likes()->where($primaryKey)
+                ->update($likeValue);
         }
     }
 
@@ -67,15 +63,13 @@ class Post extends Model
     public function showLike($user_id)
     {
         $like = $this->getLike($user_id);
-        $res = isset($like) ? (! $like) : true;
-        return $res;
+        return isset($like) ? (! $like) : true;
     }
 
     public function showUnlike($user_id)
     {
         $like = $this->getLike($user_id);
-        $res = isset($like) ? $like : true;
-        return $res;
+        return isset($like) ? $like : true;
     }
 
     public function getLikesCountAttribute()
