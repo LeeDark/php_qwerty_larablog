@@ -8,46 +8,28 @@
         {{ $post->prepareBody() }}
     </p>
 
-    <div class="row">
-        <div class="col-md-4">
+    <div class="row justify-content-between">
+        <div class="col-6">
             <a href="/posts/{{ $post->id }}" class="btn btn-primary">Read More &rarr;</a>
             @can ('update', $post)
             <a href="/posts/{{ $post->id }}/edit" class="btn btn-primary">Edit Post</a>
             @endcan
         </div>
-        <div class="col-md-4">
-            @if (auth()->check() && $post->author->id != auth()->id())
-            <div class="row">
-                @if (Auth::check())
-                    <form method="POST" action="/posts/{{ $post->id }}/like">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="like_value" value="1">
-                        <button type="submit" class="btn btn-primary"
-                            {{ $post->showLike(auth()->id()) ? '' : 'disabled' }}>
-                            Like ({{ $post->likes_count }})
-                        </button>
-                    </form>
-                    <form method="POST" action="/posts/{{ $post->id }}/unlike">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="like_value" value="0">
-                        <button type="submit" class="btn btn-primary"
-                            {{ $post->showUnlike(auth()->id()) ? '' : 'disabled' }}>
-                            Unlike ({{ $post->unlikes_count }})
-                        </button>
-                    </form>
-                @endif
+        @if (auth()->check() && $post->author->id != auth()->id())
+            <div id="div-like" class="col-6">
+                @include ('posts.like')
             </div>
-            @endif
-        </div>
-        <div class="col-md-4 text-right">
-            @can ('delete', $post)
-                <form method="POST" action="/posts/{{ $post->id }}">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                    <button type="submit" class="btn btn-danger">Delete Post</button>
-                </form>
-            @endcan
-        </div>
+        @else
+            <div class="col-6 text-right">
+                @can ('delete', $post)
+                    <form method="POST" action="/posts/{{ $post->id }}">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button type="submit" class="btn btn-danger">Delete Post</button>
+                    </form>
+                @endcan
+            </div>
+        @endif
     </div>
     
     <div class="card-footer text-muted">

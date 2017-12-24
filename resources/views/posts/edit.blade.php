@@ -25,10 +25,8 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-8">
 						<button type="submit" class="btn btn-primary">Apply</button>
-					</div>
-					<div class="col-md-6 text-right">
 						<a href="/posts/{{ $post->id }}" class="btn btn-warning">Cancel</a>
 					</div>
 				</div>
