@@ -5,25 +5,49 @@
     
     <h2 class="card-title">{{ $post->title }}</h2>
     <p class="card-text">
-        {{ $post->body }}
+        {{ $post->body() }}
     </p>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <a href="/posts/{{ $post->id }}" class="btn btn-primary">Read More &rarr;</a>
             @can ('update', $post)
             <a href="/posts/{{ $post->id }}/edit" class="btn btn-primary">Edit Post</a>
             @endcan
         </div>
-        @can ('delete', $post)
-            <div class="col-md-6 text-right">
+        <div class="col-md-4">
+            @if (auth()->check() && $post->author->id != auth()->id())
+            <div class="row">
+                @if (Auth::check())
+                    <form method="POST" action="/posts/{{ $post->id }}/like">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="like_value" value="1">
+                        <button type="submit" class="btn btn-primary"
+                            {{ $post->showLike(auth()->id()) ? '' : 'disabled' }}>
+                            Like ({{ $post->likes_count }})
+                        </button>
+                    </form>
+                    <form method="POST" action="/posts/{{ $post->id }}/unlike">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="like_value" value="0">
+                        <button type="submit" class="btn btn-primary"
+                            {{ $post->showUnlike(auth()->id()) ? '' : 'disabled' }}>
+                            Unlike ({{ $post->unlikes_count }})
+                        </button>
+                    </form>
+                @endif
+            </div>
+            @endif
+        </div>
+        <div class="col-md-4 text-right">
+            @can ('delete', $post)
                 <form method="POST" action="/posts/{{ $post->id }}">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <button type="submit" class="btn btn-danger">Delete Post</button>
                 </form>
-            </div>
-        @endcan
+            @endcan
+        </div>
     </div>
     
     <div class="card-footer text-muted">
