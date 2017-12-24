@@ -8,6 +8,17 @@ class Post extends Model
 {
     protected $guarded = [];
 
+    private $checkArray = [
+        'бублик', 
+        'ревербератор',
+        'кастет',
+        'хорь',
+        'алкоголь',
+        'превысокомногорассмотрительствующий',
+        'гражданин',
+        'паста'
+    ];
+
     public function path()
     {
         return "/posts/{$this->id}";
@@ -27,7 +38,8 @@ class Post extends Model
     {
     	// TODO: like from another user => Test User
     	if ($this->author->id == auth()->id()) {
-            //dd('You can not like/unlike your post!');
+    		// Message?
+            dd('You can not like/unlike your post!');   // 
     		return;
     	}
 
@@ -74,5 +86,19 @@ class Post extends Model
     public function getUnlikesCountAttribute()
     {
         return $this->likes()->where('like_value', 0)->count();
+    }
+
+    public function prepareBody()
+    {
+        // FIX: we can store both arrays or we can store it in the DB...
+        $body = $this->body;
+        foreach ($this->checkArray as $value) {
+            $len = mb_strlen($value);
+            $body = str_replace(
+                $value,
+                mb_substr($value, 0, 1) . str_repeat('*', $len - 2) . mb_substr($value, $len - 1, 1),
+                $body);
+        }
+        return $body;
     }
 }

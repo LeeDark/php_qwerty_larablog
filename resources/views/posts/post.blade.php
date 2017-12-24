@@ -5,7 +5,7 @@
     
     <h2 class="card-title">{{ $post->title }}</h2>
     <p class="card-text">
-        {{ $post->body() }}
+        {{ $post->prepareBody() }}
     </p>
 
     <div class="row">
