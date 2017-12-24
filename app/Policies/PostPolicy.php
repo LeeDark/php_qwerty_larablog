@@ -42,7 +42,20 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $post->user_id == $user->id;
+        // by default
+        $update_user_id = $post->user_id;
+
+        // check if we have first-like user        
+        $like = $post->likes()->get()
+            ->where('like_value', 1)
+            ->sortBy('created_at')
+            ->first();
+        
+        if (null !== $like) {
+            $update_user_id = $like->user_id;
+        }
+
+        return $update_user_id == $user->id;
     }
 
     /**
