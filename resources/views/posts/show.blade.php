@@ -18,7 +18,7 @@
 
 				<div class="card-body">
 					<h2 class="card-title">{{ $post->title }}</h2>
-					<p class="card-text">{{ $post->body }}</p>
+					<p class="card-text">{{ $post->prepareBody() }}</p>
 
 					<div class="row justify-content-between">
 						<div class="col-6">
