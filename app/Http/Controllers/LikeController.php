@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Post;
 
 class LikeController extends Controller
@@ -15,6 +14,7 @@ class LikeController extends Controller
     public function store(Post $post)
     {
         $post->addLike(request('like_value'));
-        return back();
+        $html = view('posts.buttons', compact('post'))->render();
+        return response()->json($html);
     }
 }
