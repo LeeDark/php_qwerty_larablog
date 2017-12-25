@@ -62,12 +62,14 @@ class Post extends Model
 
     public function showLike($user_id)
     {
+        if ($this->author->id == $user_id) return false;
         $like = $this->getLike($user_id);
         return isset($like) ? (! $like) : true;
     }
 
     public function showUnlike($user_id)
     {
+        if ($this->author->id == $user_id) return false;
         $like = $this->getLike($user_id);
         return isset($like) ? $like : true;
     }

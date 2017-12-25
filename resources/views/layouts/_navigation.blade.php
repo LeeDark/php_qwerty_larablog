@@ -17,7 +17,9 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="/posts">All Posts</a></li></li>
+                @if (auth()->check())
                 <li class="nav-item"><a class="nav-link" href="/posts/create">New Post</a></li>
+                @endif
             </ul>
 
             <!-- Right Side Of Navbar -->
