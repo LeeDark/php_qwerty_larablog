@@ -18,11 +18,11 @@ body {
 	z-index: 10;
 }
 
-#btn-like, #btn-unlike {
+.btn-like, .btn-unlike {
 	width: 100px;
 	margin: 0px 2px;
 }
 
-#div-like {
+.div-like {
 	padding-right: 30px;
 }

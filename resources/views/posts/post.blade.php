@@ -9,27 +9,24 @@
     </p>
 
     <div class="row justify-content-between">
-        <div class="col-6">
+        <div class="col-4">
             <a href="/posts/{{ $post->id }}" class="btn btn-primary">Read More &rarr;</a>
             @can ('update', $post)
             <a href="/posts/{{ $post->id }}/edit" class="btn btn-primary">Edit Post</a>
             @endcan
         </div>
-        @if (auth()->check() && $post->author->id != auth()->id())
-            <div id="div-like" class="col-6">
-                @include ('posts.like')
-            </div>
-        @else
-            <div class="col-6 text-right">
-                @can ('delete', $post)
-                    <form method="POST" action="/posts/{{ $post->id }}">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                        <button type="submit" class="btn btn-danger">Delete Post</button>
-                    </form>
-                @endcan
-            </div>
-        @endif
+        <div class="col-4 div-like">
+            @include ('posts.like')
+        </div>
+        <div class="col-4 text-right">
+            @can ('delete', $post)
+                <form method="POST" action="/posts/{{ $post->id }}">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <button type="submit" class="btn btn-danger">Delete Post</button>
+                </form>
+            @endcan
+        </div>
     </div>
     
     <div class="card-footer text-muted">
